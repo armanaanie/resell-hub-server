@@ -777,7 +777,7 @@ app.get("/api/categories2", async (req, res) => {
         count: 1,
       },
     },
-    { $limit: 5 } // 👈 add this
+    { $limit: 5 } 
   ]).toArray();
 
   res.send(categories);

@@ -85,10 +85,15 @@ const verifyseller= (req, res, next) => {
 
   next();
 };
-async function run() {
-  try {
+// async function run() {
+//   try {
     
-    await client.connect();
+//     await client.connect();
+
+
+client.connect(()=>{
+
+}).catch(console.dir)
     const database = client.db("resell-hub");
     const productCollection= database.collection("product");
     const userCollection= database.collection("user");
@@ -785,6 +790,9 @@ app.get("/api/categories2", async (req, res) => {
 app.get("/api/products/category/:name", async (req, res) => {
   const category = req.params.name;
 
+
+
+
   const products = await productCollection
     .find({
       category: { $regex: new RegExp(`^${category}$`, "i") }
@@ -1353,15 +1361,17 @@ app.patch("/api/admin/orders/:id/dispute/resolve", async (req, res) => {
 
   res.send(result);
 });
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
+    // await client.db("admin").command({ ping: 1 });
+//     console.log("Pinged your deployment. You successfully connected to MongoDB!");
+//   } finally {
    
   
-  }
-}
-run().catch(console.dir);
+//   }
+// }
+// run().catch(console.dir);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
+
+module.exports = app
